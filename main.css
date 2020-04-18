@@ -1,0 +1,126 @@
+html, body {
+	margin: 0px;
+	height: 100%;
+}
+
+body {
+	background-color: #171e26;
+	font-family: 'PT Sans Narrow', sans-serif;
+}
+
+h1 {
+	color: #;
+}
+
+p {
+}
+
+a {
+	color: white;
+}
+
+div.header {
+	position: relative;
+	margin: 0;
+	padding: 10px 0 10px 0;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 30px;
+
+	text-align: center;
+	background-color: #162f3b;
+	color: #FFFFFF;
+	font-size: 20pt;
+	margin: 0;
+	padding: 10px 0 10px 0;
+}
+
+div.heading {
+	position: absolute;
+	text-align: center;
+
+	width: 70%;
+	left: 15%;
+	color: #FFFFFF;
+	font-weight: bold;
+	font-family: Sans-serif;
+	font-size: 25px;
+}
+
+div.impressum {
+	position: absolute;
+	top: 15px;
+	right: 0;
+	width: 15%;
+	height: 30px;
+	font-family: Sans-serif;
+	font-size: 14px;
+}
+
+div.topleft {
+	position: absolute;
+	top: 15px;
+	left: 0;
+	width: 15%;
+	height: 30px;
+	font-family: Sans-serif;
+	font-size: 14px;
+}
+
+div.main {
+	color: white;
+	margin-left: 5%;
+	margin-right: 5%;
+	margin-top: 3%;
+}
+
+@media (max-width:1400px) {
+	div.heading {
+		font-size: 14px;
+	}
+
+	div.impressum {
+		font-size: 10px;
+	}
+}
+
+div.visu {
+	height: 100%;
+	top: 0px;
+	position: relative;
+	z-index: -1;
+}
+
+.axisX line{
+  stroke: #90909090;
+}
+
+.axisX path{
+  stroke: white;
+}
+
+.axisX text{
+  fill: white;
+}
+
+.axisY line{
+  stroke: #90909050;
+}
+
+.axisY path{
+  stroke: white;
+}
+
+.axisY text{
+  fill: white;
+}
+
+.grid .tick {
+    stroke: white;
+    opacity: 0.7;
+}
+
+.grid path {
+      stroke-width: 2;
+}

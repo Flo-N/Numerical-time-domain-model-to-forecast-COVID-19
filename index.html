@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="refresh" content="300000" >
+	<title>COVID-19 Spread Forecast</title>
+	<link rel="stylesheet" href="main.css">
+	<script src="d3.v4.js"></script>
+	<script src="d3-scale-chromatic.v1.min.js"></script>
+        <link href="https://fonts.googleapis.com/css?family=PT+Sans+Narrow&display=swap" rel="stylesheet">
+</head>
+
+<body>
+	<div class="header">
+		<div class="heading">
+			A numerical time domain model based approach to forecast COVID-19 outbreak for Germany
+		</div>
+		<div class="impressum">
+			<a href="https://peter.pollak-diener.de/impressum.htm">Impressum und Datenschutz</a>
+		</div>
+		<div class="topleft">
+			<a href="background"> Background Information</a>
+		</div>
+	</div>
+
+	<div class="visu" id="visu"></div>
+	<script>
+		var country = 'Germany';
+	</script>
+	<script src="visu-beta.js"></script>
+</body>
+
+</html>
