@@ -14,9 +14,16 @@
 ** along with this program. If not, see <http://www.gnu.org/licenses/>.
 **********************************************************************/
 
-
 var width = 1600;
 var height = 800;
+
+var restrictions = [
+//  [Date(2020,1,26), 1],
+  [new Date(2020,1,23), 0.8],
+  [new Date(2020,2,08), 0.7],
+  [new Date(2020,2,13), 0.4],
+  [new Date(2020,2,21), 0.165]
+]
 
 var svg = d3.select("#visu")
   .append("svg-container", true)
@@ -149,34 +156,47 @@ var process_data = function(data_diagnosed, data_dead) {
     dates[0].Infectable = P0;
     dates[38].NewInfections = 5;
 
-    var date_restriction_0 = new Date(2020,1,23);
-    var date_restriction_1 = new Date(2020,2,8);
-    var date_restriction_2 = new Date(2020,2,13);
-    var date_restriction_3 = new Date(2020,2,21);
+    var k = 0;
+    var rateOfSocialInteraction = 1;
 
     for (var i=39; i<280; i++) {
       var date = dates[i];
 
-      var rateOfSocialInteraction = 1;
+      console.log(date.time);
+      //console.log(date.time > restrictions[k][0]);
+      console.log(restrictions[k][1]);
+      console.log(k);
 
-
-      if (date.time > date_restriction_0) {
-        rateOfSocialInteraction = 0.8;
+      //console.log(restrictions[k][0]);
+      if(date.time > restrictions[k][0]){
+        console.log("if");
+        rateOfSocialInteraction = restrictions[k][1];
+        console.log(restrictions[k][1]);
+        if(k != (restrictions.length - 1))
+        k++;
       }
 
-      if (date.time > date_restriction_1) {
-        rateOfSocialInteraction = 0.7;
-      }
+      // for(var k = 0; k < restrictions.length; k++){
+      //
+      // }
 
-      if (date.time > date_restriction_2) {
-        rateOfSocialInteraction = 0.4;
-      }
+      // if (date.time > date_restriction_0) {
+      //   rateOfSocialInteraction = 0.8;
+      // }
+      //
+      // if (date.time > date_restriction_1) {
+      //   rateOfSocialInteraction = 0.7;
+      // }
+      //
+      // if (date.time > date_restriction_2) {
+      //   rateOfSocialInteraction = 0.4;
+      // }
+      //
+      // if (date.time > date_restriction_3) {
+      //   rateOfSocialInteraction = 0.165;
+      // }
 
-      if (date.time > date_restriction_3) {
-        rateOfSocialInteraction = 0.165;
-      }
-
-      console.log(date_restriction_1);
+      //console.log(date_restriction_1);
 
       // Infizierend
       for (var incTime=3; incTime<=14; incTime++) {
@@ -256,7 +276,7 @@ var process_data = function(data_diagnosed, data_dead) {
     }
 
 
-    console.log(dates);
+    //console.log(dates);
 
     dataReady[0] = sim_infectable;
     dataReady[1] = sim_infected;
@@ -579,7 +599,31 @@ var process_data = function(data_diagnosed, data_dead) {
 	    .html('Reliance on the Website for medical guidance or use of the Website in commerce is strictly prohibited. Some data is provided by Johns Hopkins University (JHU) Center for Systems Science and Engineering.');
 
 
+}
 
 
+//var date_restriction_3 = new Date(2020,2,21);
 
+var inputPercent = document.getElementById("addPercent");
+var inputDate =document.getElementById("addDate");
+
+inputPercent.addEventListener("keyup", function(event) {
+  if (event.keyCode === 13) {
+   event.preventDefault();
+   document.getElementById("addBtn").click();
+   //console.log(inputPercent.value);
+  }
+});
+
+inputDate.addEventListener("keyup", function(event) {
+  if (event.keyCode === 13) {
+   event.preventDefault();
+   document.getElementById("addBtn").click();
+   //console.log(inputDate.value);
+  }
+});
+
+function logInputData() {
+  console.log(inputPercent.value);
+  console.log(inputDate.value);
 }
