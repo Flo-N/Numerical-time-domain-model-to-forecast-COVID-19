@@ -606,27 +606,28 @@ function insertRestrictionBtn() {
 
   process_data(data_diagnosed, data_dead);
 
-  //drawRestrictionsTable();
+  drawRestrictionsTable();
 }
 
 function drawRestrictionsTable(){
 
-  var myTable = "<table style=' position: absolute;left: -250px; margin-left: 50%; bottom: 20px; width: 500px'> <tr>";
-      myTable += "<caption style='width: 500px; color: white; text-align: center;'> Social activity </caption>";
-      myTable += "<td style='width: 250px; color: white; text-align: center;'>Beginning</td>";
-      myTable += "<td style='width: 250px; color: white; text-align: center;'>Social activity is</td>";
+  var activityTable = "<table style=' position: relative; left: -250px; top: 5%; margin-left: 50%; width: 500px'>";
+      activityTable += "<caption style='width: 500px; color: #00c652; text-align: center; font-weight: bold;'> Social activity </caption>";
+      activityTable += "<tr>";
+      activityTable += "<td style='width: 250px; color: #03a9f4; text-align: center;'>Beginning</td>";
+      activityTable += "<td style='width: 250px; color: #03a9f4; text-align: center;'>Social activity is</td>";
 
-      // myTable+="<tr><td style='width: 100px;                   '>---------------</td>";
-      // myTable+="<td     style='width: 100px; text-align: right;'>---------------</td>";
-      // myTable+="<td     style='width: 100px; text-align: right;'>---------------</td></tr>";
+      // activityTable += "<tr><td style='width: 100px;                   '>---------------</td>";
+      // activityTable += "<td     style='width: 100px; text-align: right;'>---------------</td>";
+      // activityTable += "<td     style='width: 100px; text-align: right;'>---------------</td></tr>";
 
   for (var i = 0; i < restrictions.length; i++) {
-    myTable += "<tr><td style='width: 100px; text-align: center;'>" + restrictions[i][0].toLocaleDateString('de-DE', {year: 'numeric', month: 'long', day: 'numeric'}) + "</td>";
-    myTable += "<td style='width: 100px; text-align: center;'>" + restrictions[i][1] + " %</td>";
-  //  myTable+="<td style='width: 100px; text-align: right;'>" + myArray[i] + "</td></tr>";
+    activityTable += "<tr><td style='width: 100px; text-align: center; color: white;'>" + restrictions[i][0].toLocaleDateString('de-DE', {year: 'numeric', month: 'long', day: 'numeric'}) + "</td>";
+    activityTable += "<td style='width: 100px; text-align: center; color: white;'>" + (restrictions[i][1] * 100) + " %</td>";
+  //  activityTable += "<td style='width: 100px; text-align: right;'>" + myArray[i] + "</td></tr>";
   }
-   myTable += "</table>";
+   activityTable += "</table>";
 
-  document.write( myTable);
+  document.getElementById('activityTable').innerHTML = activityTable;
 
 }
