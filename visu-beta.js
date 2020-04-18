@@ -17,13 +17,15 @@
 var width = 1600;
 var height = 800;
 
+// values matching the current curve
 var restrictions = [
-//  [Date(2020,1,26), 1],
   [new Date(2020,1,23), 0.8],
   [new Date(2020,2,08), 0.7],
   [new Date(2020,2,13), 0.4],
   [new Date(2020,2,21), 0.165]
 ]
+
+drawRestrictionsTable();
 
 var svg = d3.select("#visu")
   .append("svg-container", true)
@@ -164,9 +166,9 @@ var process_data = function(data_diagnosed, data_dead) {
     for (var i=39; i<280; i++) {
       var date = dates[i];
 
-      console.log(date.time);
-      console.log(restrictions[k][1]);
-      console.log(k);
+      // console.log(date.time);
+      // console.log(restrictions[k][1]);
+      // console.log(k);
 
       // einschränkung der Verbreitung
       if(date.time > restrictions[k][0]){
@@ -578,7 +580,6 @@ var process_data = function(data_diagnosed, data_dead) {
 	  .attr('dy', 20)
 	    .html('Reliance on the Website for medical guidance or use of the Website in commerce is strictly prohibited. Some data is provided by Johns Hopkins University (JHU) Center for Systems Science and Engineering.');
 
-
 }
 
 var inputPercent = document.getElementById("addPercent");
@@ -604,5 +605,28 @@ function insertRestrictionBtn() {
   d3.select(".graphs").remove();
 
   process_data(data_diagnosed, data_dead);
+
+  //drawRestrictionsTable();
+}
+
+function drawRestrictionsTable(){
+
+  var myTable = "<table style=' position: absolute;left: -250px; margin-left: 50%; bottom: 20px; width: 500px'> <tr>";
+      myTable += "<caption style='width: 500px; color: white; text-align: center;'> Social activity </caption>";
+      myTable += "<td style='width: 250px; color: white; text-align: center;'>Beginning</td>";
+      myTable += "<td style='width: 250px; color: white; text-align: center;'>Social activity is</td>";
+
+      // myTable+="<tr><td style='width: 100px;                   '>---------------</td>";
+      // myTable+="<td     style='width: 100px; text-align: right;'>---------------</td>";
+      // myTable+="<td     style='width: 100px; text-align: right;'>---------------</td></tr>";
+
+  for (var i = 0; i < restrictions.length; i++) {
+    myTable += "<tr><td style='width: 100px; text-align: center;'>" + restrictions[i][0].toLocaleDateString('de-DE', {year: 'numeric', month: 'long', day: 'numeric'}) + "</td>";
+    myTable += "<td style='width: 100px; text-align: center;'>" + restrictions[i][1] + " %</td>";
+  //  myTable+="<td style='width: 100px; text-align: right;'>" + myArray[i] + "</td></tr>";
+  }
+   myTable += "</table>";
+
+  document.write( myTable);
 
 }

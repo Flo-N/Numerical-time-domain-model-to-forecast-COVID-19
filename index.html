@@ -25,9 +25,13 @@
 
 	<div class="variable">
 		<div class="heading">Add a restriction:</div>
-		Date: <input type="date" id="addDate" value="0">
+		Date: <input type="date" id="addDate">
 		Public interaction in %: <input type="number" min="0" max="100" id="addPercent" value="50">
 		<button id="addBtn" onclick="insertRestrictionBtn()">Add</button>
+	</div>
+
+	<div style="position: absolute; left: 550px">
+		<div id="tablePrint"> </div>
 	</div>
 
 	<div class="visu" id="visu"></div>
@@ -38,6 +42,7 @@
 		</script>
 		<script src="visu-beta.js"></script>
 	</div>
+
 
 </body>
 
