@@ -38,6 +38,8 @@ var svg = d3.select("#visu")
 var data_diagnosed = [];
 var data_dead = [];
 
+document.getElementById('addDate').valueAsDate = new Date();
+
 console.log(country);
 
 d3.csv("https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_deaths_global.csv", function(data) {
@@ -163,40 +165,15 @@ var process_data = function(data_diagnosed, data_dead) {
       var date = dates[i];
 
       console.log(date.time);
-      //console.log(date.time > restrictions[k][0]);
       console.log(restrictions[k][1]);
       console.log(k);
 
-      //console.log(restrictions[k][0]);
+      // einschränkung der Verbreitung
       if(date.time > restrictions[k][0]){
-        console.log("if");
         rateOfSocialInteraction = restrictions[k][1];
-        console.log(restrictions[k][1]);
         if(k != (restrictions.length - 1))
         k++;
       }
-
-      // for(var k = 0; k < restrictions.length; k++){
-      //
-      // }
-
-      // if (date.time > date_restriction_0) {
-      //   rateOfSocialInteraction = 0.8;
-      // }
-      //
-      // if (date.time > date_restriction_1) {
-      //   rateOfSocialInteraction = 0.7;
-      // }
-      //
-      // if (date.time > date_restriction_2) {
-      //   rateOfSocialInteraction = 0.4;
-      // }
-      //
-      // if (date.time > date_restriction_3) {
-      //   rateOfSocialInteraction = 0.165;
-      // }
-
-      //console.log(date_restriction_1);
 
       // Infizierend
       for (var incTime=3; incTime<=14; incTime++) {
@@ -333,12 +310,15 @@ var process_data = function(data_diagnosed, data_dead) {
       .selectAll('line')
       .attr('x1', width);
 
+    var graphs = svg.append("g")
+                    .attr("class", "graphs");
+
     // Graphs
     var line = d3.line()
       .x(function(d) { return x(+d.time) })
       .y(function(d) { return y(+d.value) });
 
-    svg.selectAll("myLines")
+    graphs.selectAll("myLines")
       .data(dataReady)
       .enter()
       .append("path")
@@ -348,7 +328,7 @@ var process_data = function(data_diagnosed, data_dead) {
         .style("fill", "none");
 
     // Points on graphs
-    svg
+    graphs
       .selectAll("myDots")
       .data(dataReady)
       .enter()
@@ -364,7 +344,7 @@ var process_data = function(data_diagnosed, data_dead) {
         .attr("stroke", "#40404060");
 
     // Graph labels
-    svg
+    graphs
       .selectAll("myLabels")
       .data(dataReady)
       .enter()
@@ -601,17 +581,13 @@ var process_data = function(data_diagnosed, data_dead) {
 
 }
 
-
-//var date_restriction_3 = new Date(2020,2,21);
-
 var inputPercent = document.getElementById("addPercent");
-var inputDate =document.getElementById("addDate");
+var inputDate = document.getElementById("addDate");
 
 inputPercent.addEventListener("keyup", function(event) {
   if (event.keyCode === 13) {
    event.preventDefault();
    document.getElementById("addBtn").click();
-   //console.log(inputPercent.value);
   }
 });
 
@@ -619,11 +595,14 @@ inputDate.addEventListener("keyup", function(event) {
   if (event.keyCode === 13) {
    event.preventDefault();
    document.getElementById("addBtn").click();
-   //console.log(inputDate.value);
   }
 });
 
-function logInputData() {
-  console.log(inputPercent.value);
-  console.log(inputDate.value);
+function insertRestrictionBtn() {
+  restrictions.push([new Date(inputDate.value), (inputPercent.value / 100)])
+
+  d3.select(".graphs").remove();
+
+  process_data(data_diagnosed, data_dead);
+
 }
