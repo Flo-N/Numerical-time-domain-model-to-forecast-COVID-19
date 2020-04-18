@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>COVID-19 Spread Forecast</title>
+	<link rel="stylesheet" href="main.css">
+        <link href="https://fonts.googleapis.com/css?family=PT+Sans+Narrow&display=swap" rel="stylesheet">
+</head>
+ 
+<body>
+	<div class="header">
+		<div class="heading">
+			A numerical time domain model based approach to forecast COVID-19 outbreak for Germany
+		</div>
+		<div class="impressum">
+			<a href="https://peter.pollak-diener.de/impressum.htm">Impressum und Datenschutz</a>
+		</div>
+                <div class="topleft">
+			<a href="./"> Back to graph</a>
+                </div>
+       	</div>
+	<div class="main">
+		<H3>Why Forecasting?</H3>
+		<p>
+			The outbreak of an epidemic is a process that often needs
+			to be controlled by authorities. At the same time
+			numbers of infected people do not correspond to
+			numbers of people which are confirmed diagnosed.
+			Only the number of diagnosed people is available as
+			confirmed data source while the number of actual
+			infections can be significantly higher. <br><br>
+			The faster the infection spreads the more difference
+			is in between these two numbers and the more
+			difficult it is to provide a solid method of control
+			strategy. <br><br>
+			It get's even more difficult if people are not
+			diagnosable but infectious for a longer period of time either
+			because infectious people do not show symptoms yet or
+			symptoms are not strong in a large number of cases.
+			<br><br>
+			This is what is called a Dead Time System. A system
+			that reacts on changes of its surrounding with a
+			delay. Only after that delay changes get
+			visible in numbers. So if authorities decide to
+			apply restrictions trending of the infection rate
+			will only change after that delay time. That makes
+			it extremely difficult to make the right decisions.
+			<br><br>
+			Covid-19 is such a dead time system.
+			<br><br>
+			Making desicions without having a forecast that
+			provides information about the results of
+			that decisions (which are only visible in the future) 
+			the whole process is prone to errors
+			due to late action and following overreactions.
+			<br><br>
+			No forecasting can be perfect, in fact it can be
+			totally wrong if some assumtions were wrong. But at
+			least it can be possible to get an idea of how the
+			system reacts on changes in principle. And in case
+			the assumptions were right and the model parameters
+			are stable, forecasting can provide a quite solid
+			information for the near future, even if the results
+			for distant future are totally wrong. And that
+			information might be sufficient to make good
+			decisions.
+			<br><br>
+			We could not find any good forecasting information for
+			Covid-19 on the web. There are some good
+			publications of mathematical models but
+			unfortionately without real calculations with real
+			numbers. So we made our own.
+			<br><br>
+			And again a disclaimer: We are not professionals in
+			virology. We have a solid understanding of math and
+			that is only a try to use the available numbers of
+			cases to create a model that seems sufficiently
+			accurate to us. A virus might behave different than
+			we assumed. People in a country might behave
+			different than we assumed. This can change
+			everything and our calculation can be totally wrong.
+			<br><br>
+			SO DO NOT USE THESE RESULTS FOR ANY OTHER PURPOSE
+			THAN RESEARCH AND STUDY OF THE PHENOMENOM ITSELF.
+		</p>
+		<H3>What is a numerical time domain model?</H3>
+		<p>
+			Numerical modelling can provide solutions for
+			problems that can not be solved by pure analytical
+			solutions. Calculation of a numerical method is in
+			general more simplistic than analytical methods
+			which can invole highly complex formulas. Numerical
+			modelling is the best choice for complex problems
+			that need to be solved on a computer. Downside is
+			the higher amount of calculations needed to get to a
+			solution than it would be with an analytical
+			approach.
+			<br><br>
+			Numerical modeling in time domain means that time
+			is sliced in timeslots. For each timeslot a set of
+			computations is performed to get the state of the
+			system in the next timeslot. It sounds quite simple
+			and in fact it is.
+		</p>
+		<H3>Assumptions</H3>
+		<p>
+			First we made some assumtions. The most important
+			one is that there is no immunity at the beginning
+			and everybody could possibly get infected (this
+			might - hopefully - be wrong). So the
+			number of infectable people at the beginning is
+			exacltly the population of the country.
+			<br><br>
+			Another assumption is that the virus itself will not
+			change a lot in terms of how easy it spreads under
+			the same conditions. It is known by specialists that
+			most viruses tend to get more likely to be spread as
+			it mutates but we neglegt this for simplicity.
+			<br><br>
+			The third unknown is how many deaths
+			are to be expected compared to the number of total
+			infections. As authorities only count the number of
+			diagnosed people there is definitely the possibility
+			of dignosable people not getting a dignosis and so not
+			being counted. But we had to decide which death rate
+			to use in the model. We decided to use the number of
+			0.5&percnt; which is known from South Korea. We
+			think the lowest known number must be used in any
+			calculation of death rates as all other countries
+			which have higher rates just did not diagnose all
+			diagnosable people. Of course this might also be the
+			case in South Korea and so in fact we expect the
+			actual rate of death to be even lower then
+			0.5&percnt; when people get proper medical treatment. 
+			Also we do not take into account that
+			overloading of medical infrastructre may increase
+			the rate of death at a later point in time.
+			<br><br>
+			As a calculation with large numbers we do not track
+			down effects to single persons or single regions in a
+			country. We expect the model to be a system of mean
+			values. So numbers in some regions may be higher
+			while being lower in some other regions.
+			<br><br>
+			Furthermore we implemented methodes to model social
+			restrictions that are variable in time. We do not
+			know the exact effect of different methods of social
+			restrictions as nobody ever tried this before in
+			Germany. So we do an estimation at this point.
+			After some time the model is able to learn which
+			type of social restriction causes which numerical
+			reduction of infection rates. We are able to learn
+			this from other countries that are ahead in time.
+			But countries with different social, political and
+			technical background cannot be compared to each
+			other that simple. For example we assume that
+			closing down schools will reduce the overall social
+			activity by 20&percnt;. At this point in time we
+			have no idea what amount of reduction further
+			methods of restriction will bring.
+			<br><br>
+			Last it is assumed that one person can get the
+			disease only once in the near future. The model
+			assumes that once someone got the disease that
+			person will either get immune after some time or die. 
+			That person cannot get the disease a second time.
+		</p>
+		
+		<H3>Data Sources and how calculation works</H3>
+		<p>
+			First we want to thank Johns Hopkins University for
+			providing data of history of actual cases and deaths 
+			for most countries in the world in a
+			computer readable format on Github. This is our main
+			data source. This work is greatly appreciated. 
+			Please notice their terms of use for that data if
+			you plan to use our calculation or results.
+			<br><br>
+			Now we want to explain how the model itself works. As
+			described before we are using a numerical time
+			domain model. We use a time slice width of one day
+			as this also matches the rate of data in the
+			repository of Johns Hopkins University. The model is
+			calculated day by day. 
+			<br><br>
+			First the number of infectious people (people who
+			are able to infect another person) for the
+			current day is calculated by looking at the number
+			of new infections in the last days. We define a time
+			window in the history in which an infection must
+			have been in order for that person to be infectious
+			today. Then we count how many infectious people we
+			have today (Forecast Infectious).
+			<br><br>
+			From the number of infectious people today we can
+			derive the number of new infections today (Forecast
+			new infections). This is
+			simply done by multiplication of the number of
+			infectious people times a constant which defines how
+			many infectable persons will get infected in one day
+			by one infectious person. That result is then multiplied
+			with the ratio of infectable persons over the total
+			number of population and multiplied with a factor of
+			social interaction. The second multiplication takes
+			into account that it gets less likely for an
+			infectios person to find someone to infect who is
+			susceptible for the disease as time goes by and more
+			people get immune. The third multiplication enables
+			us to reduce the factor of social interaction as
+			authorities apply social restrictions. This factor
+			starts with 1 and is reduced over time as
+			restrictions are introduced.
+			<br><br>
+			Now we accumulate that number of new infections per
+			day over history. This results in the estimated number of
+			infections (Forecast Infected incl. Dead).
+			<br><br>
+			The number of estimated infectable persons (someone who is
+			susceptible of getting the disease) is then simply
+			calculated by subtracting the number of estimated
+			infected people from the total population. This
+			results in Forecast Infectable.
+			<br><br>
+			The number of people who could actually get a
+			positiv test result (Forecast Diagnosable) in a diagosis is simple the
+			curve of Forecast Infected delayed by 9 days. This
+			has been assumed as the mean time between infection
+			and diagnosis. The model has been trained by
+			parameterization to fit that curve on the actual
+			number of confirmed cases in history. After the
+			parameters are derived that curve allows a forecast
+			of confirmed cases for the near future.
+			<br><br>
+			The number of accumulated deaths (Forcast Dead)
+			is calculated by the assumption that 0.5&percnt; of
+			infections will result in death. So the curve of
+			Forecast Infected (which should in fact be a rather
+			accurate estimation of real infections) is
+			multiplied by 0.5&percnt; and then delayed by a
+			certain amount of time that is the mean time between
+			an infection and death in case a person dies. This
+			delay time has been derived from data of other
+			countries to be around 14 days.
+			<br><br>
+			The forecast of ICU Load (people in need of
+			intensive care) is a rectangle window function over the histoy
+			of new infections. It is derived from a rolling sum
+			over the history of new infections in an interval of
+			icuDuration days mutliplied by a factor icuRate. icu
+			Rate is the proportion of infected needing intensive
+			care after some time.
+			icuDuration is the mean time a person
+			will stay in icu. That curve is then delayed by
+			icuDelay because it takes some time from infection
+			until intensive care is needed. This delay time is set
+			to 9 days. The mean time a person will stay in icu
+			is set to 15 days.
+			<br><br>
+		</p>
+		<H3>Interested in detail?</H3>
+		<p>
+			All the calculation is done in your browser in
+			javascript so everybody is able to see the source
+			code, copy and check it and apply changed to it. Data from
+			Johns Hopkins University is downloaded in real time
+			from the github repository. For research
+			the code may be used according to the terms of Gnu
+			Public License Version 3 or later. 
+			<a href="visu.js">Get the source</a>
+		</p>
+	</div>
+</body>
+
+</html> 
