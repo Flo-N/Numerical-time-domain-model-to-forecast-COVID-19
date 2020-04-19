@@ -3,10 +3,10 @@
 <head>
 	<meta charset="UTF-8">
 	<title>COVID-19 Spread Forecast</title>
-	<link rel="stylesheet" href="main.css">
+	<link rel="stylesheet" href="../main.css">
         <link href="https://fonts.googleapis.com/css?family=PT+Sans+Narrow&display=swap" rel="stylesheet">
 </head>
- 
+
 <body>
 	<div class="header">
 		<div class="heading">
@@ -16,7 +16,7 @@
 			<a href="https://peter.pollak-diener.de/impressum.htm">Impressum und Datenschutz</a>
 		</div>
                 <div class="topleft">
-			<a href="./"> Back to graph</a>
+			<a href="../"> Back to graph</a>
                 </div>
        	</div>
 	<div class="main">
@@ -50,7 +50,7 @@
 			<br><br>
 			Making desicions without having a forecast that
 			provides information about the results of
-			that decisions (which are only visible in the future) 
+			that decisions (which are only visible in the future)
 			the whole process is prone to errors
 			due to late action and following overreactions.
 			<br><br>
@@ -131,7 +131,7 @@
 			diagnosable people. Of course this might also be the
 			case in South Korea and so in fact we expect the
 			actual rate of death to be even lower then
-			0.5&percnt; when people get proper medical treatment. 
+			0.5&percnt; when people get proper medical treatment.
 			Also we do not take into account that
 			overloading of medical infrastructre may increase
 			the rate of death at a later point in time.
@@ -162,17 +162,17 @@
 			Last it is assumed that one person can get the
 			disease only once in the near future. The model
 			assumes that once someone got the disease that
-			person will either get immune after some time or die. 
+			person will either get immune after some time or die.
 			That person cannot get the disease a second time.
 		</p>
-		
+
 		<H3>Data Sources and how calculation works</H3>
 		<p>
 			First we want to thank Johns Hopkins University for
-			providing data of history of actual cases and deaths 
+			providing data of history of actual cases and deaths
 			for most countries in the world in a
 			computer readable format on Github. This is our main
-			data source. This work is greatly appreciated. 
+			data source. This work is greatly appreciated.
 			Please notice their terms of use for that data if
 			you plan to use our calculation or results.
 			<br><br>
@@ -181,7 +181,7 @@
 			domain model. We use a time slice width of one day
 			as this also matches the rate of data in the
 			repository of Johns Hopkins University. The model is
-			calculated day by day. 
+			calculated day by day.
 			<br><br>
 			First the number of infectious people (people who
 			are able to infect another person) for the
@@ -265,10 +265,10 @@
 			Johns Hopkins University is downloaded in real time
 			from the github repository. For research
 			the code may be used according to the terms of Gnu
-			Public License Version 3 or later. 
+			Public License Version 3 or later.
 			<a href="visu.js">Get the source</a>
 		</p>
 	</div>
 </body>
 
-</html> 
+</html>

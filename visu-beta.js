@@ -19,6 +19,7 @@ var height = 800;
 
 // values matching the current curve
 var restrictions = [
+  [new Date(2020,1,01), 1.0],
   [new Date(2020,1,23), 0.8],
   [new Date(2020,2,08), 0.7],
   [new Date(2020,2,13), 0.4],
@@ -582,8 +583,10 @@ var process_data = function(data_diagnosed, data_dead) {
 
 }
 
+
+// input functions for restrictions
+
 var inputPercent = document.getElementById("addPercent");
-var inputDate = document.getElementById("addDate");
 
 inputPercent.addEventListener("keyup", function(event) {
   if (event.keyCode === 13) {
@@ -592,6 +595,8 @@ inputPercent.addEventListener("keyup", function(event) {
   }
 });
 
+var inputDate = document.getElementById("addDate");
+
 inputDate.addEventListener("keyup", function(event) {
   if (event.keyCode === 13) {
    event.preventDefault();
@@ -599,8 +604,31 @@ inputDate.addEventListener("keyup", function(event) {
   }
 });
 
+// add restriction to array and reload graph
 function insertRestrictionBtn() {
-  restrictions.push([new Date(inputDate.value), (inputPercent.value / 100)])
+  restrictions.push([new Date(inputDate.value), (inputPercent.value / 100)]);
+
+  d3.select(".graphs").remove();
+
+  process_data(data_diagnosed, data_dead);
+
+  drawRestrictionsTable();
+}
+
+
+// functions for removing restrictions
+
+var removeRestriction = document.getElementById("removeRestriction");
+
+removeRestriction.addEventListener("keyup", function(event) {
+  if (event.keyCode === 13) {
+   event.preventDefault();
+   document.getElementById("removeBtn").click();
+  }
+});
+
+function removeRestrictionBtn() {
+  restrictions.splice(removeRestriction.value, 1);
 
   d3.select(".graphs").remove();
 
@@ -614,15 +642,17 @@ function drawRestrictionsTable(){
   var activityTable = "<table style=' position: relative; left: -250px; top: 5%; margin-left: 50%; width: 500px'>";
       activityTable += "<caption style='width: 500px; color: #00c652; text-align: center; font-weight: bold;'> Social activity </caption>";
       activityTable += "<tr>";
-      activityTable += "<td style='width: 250px; color: #03a9f4; text-align: center;'>Beginning</td>";
-      activityTable += "<td style='width: 250px; color: #03a9f4; text-align: center;'>Social activity is</td>";
+      activityTable += "<td style='width: 50px; color: #03a9f4; text-align: center;'>Nr.</td>";
+      activityTable += "<td style='width: 225px; color: #03a9f4; text-align: center;'>Beginning</td>";
+      activityTable += "<td style='width: 225px; color: #03a9f4; text-align: center;'>Social activity is</td>";
 
       // activityTable += "<tr><td style='width: 100px;                   '>---------------</td>";
       // activityTable += "<td     style='width: 100px; text-align: right;'>---------------</td>";
       // activityTable += "<td     style='width: 100px; text-align: right;'>---------------</td></tr>";
 
   for (var i = 0; i < restrictions.length; i++) {
-    activityTable += "<tr><td style='width: 100px; text-align: center; color: white;'>" + restrictions[i][0].toLocaleDateString('de-DE', {year: 'numeric', month: 'long', day: 'numeric'}) + "</td>";
+    activityTable += "<tr><td style='width: 100px; text-align: center; color: white;'>" + i + "</td>";
+    activityTable += "<td style='width: 100px; text-align: center; color: white;'>" + restrictions[i][0].toLocaleDateString('en-US', {year: 'numeric', month: 'long', day: 'numeric'}) + "</td>";
     activityTable += "<td style='width: 100px; text-align: center; color: white;'>" + (restrictions[i][1] * 100) + " %</td>";
   //  activityTable += "<td style='width: 100px; text-align: right;'>" + myArray[i] + "</td></tr>";
   }

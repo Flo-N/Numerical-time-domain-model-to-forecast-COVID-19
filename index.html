@@ -24,17 +24,21 @@
 	</div>
 
 	<div class="variable">
-		<div class="heading" style="color: #00c652;">Add a restriction:</div>
+		<div class="heading" style="color: #00c652; margin-bottom: 10px;">Add a restriction:</div>
 		Date: <input type="date" id="addDate">
-		Public interaction in %: <input type="number" min="0" max="100" id="addPercent" value="50">
+		Public interaction in %: <input type="number" min="0" max="100" id="addPercent" value="25">
 		<button id="addBtn" onclick="insertRestrictionBtn()">Add</button>
 	</div>
 
-
-
 	<div id="activityTable" style="position: relative; margin-top: 50px"> </div>
 
-	<div class="visu" id="visu"></div>
+	<div class="variable" style="margin-bottom: 20px;">
+		<div class="heading" style="color: #00c652; margin-bottom: 10px;">Remove a restriction:</div>
+		Remove number: <input type="number" min="1" id="removeRestriction" value="1">
+		<button id="removeBtn" onclick="removeRestrictionBtn()">Remove</button>
+	</div>
+
+	<div class="visu" id="visu" style="top: 10px;"></div>
 
 	<div>
 		<script>
