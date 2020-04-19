@@ -628,8 +628,9 @@ removeRestriction.addEventListener("keyup", function(event) {
 });
 
 function removeRestrictionBtn() {
-  restrictions.splice(removeRestriction.value, 1);
-
+  if (restrictions.length >= 3){
+    restrictions.splice(removeRestriction.value, 1);
+  }
   d3.select(".graphs").remove();
 
   process_data(data_diagnosed, data_dead);
